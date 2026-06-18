@@ -1,6 +1,48 @@
 /* =============================================
    JESSIE'S ICE PORTFOLIO — script.js
    ============================================= */
+   
+/* ---------- SUPABASE SETUP ---------- */
+const SUPABASE_URL = 'https://egyyblxmqbvaatgivscs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVneXlibHhtcWJ2YWF0Z2l2c2NzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Mzc1NDMsImV4cCI6MjA5NzMxMzU0M30.5WADyWuN3GO8kO6YKp0I88qH6Ki6t8uFnQEYP0sKEU0';
+
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+/* ---------- FETCH & RENDER PROJECTS ---------- */
+async function loadProjects() {
+  const grid = document.getElementById('projectsGrid');
+
+ const { data: projects, error } = await sb
+  .from('projects')
+  .select('*')
+  .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error loading projects:', error);
+    grid.innerHTML = '<p style="color: var(--text-muted)">Couldn\'t load projects right now.</p>';
+    return;
+  }
+
+  grid.innerHTML = projects.map(project => `
+    <div class="project-card">
+      <div class="project-header">
+        <span class="project-type">${project.type}</span>
+        <span class="project-year">${project.year}</span>
+      </div>
+      <h3 class="project-title">${project.title}</h3>
+      <p class="project-desc">${project.description}</p>
+      <div class="project-tags">
+        ${project.tech_tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+      </div>
+      <div class="project-links">
+        ${project.live_link ? `<a href="${project.live_link}" class="project-link" target="_blank">live demo ↗</a>` : ''}
+        ${project.github_link ? `<a href="${project.github_link}" class="project-link" target="_blank">github ↗</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+loadProjects();
 
 /* ---------- DARK / LIGHT MODE ---------- */
 const themeToggle = document.getElementById('themeToggle');
@@ -117,46 +159,3 @@ window.addEventListener('scroll', () => {
   });
 });
 
-
-
-/* ---------- SUPABASE SETUP ---------- */
-const SUPABASE_URL = 'https://egyyblxmqbvaatgivscs.supabase.co/rest/v1/';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVneXlibHhtcWJ2YWF0Z2l2c2NzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3Mzc1NDMsImV4cCI6MjA5NzMxMzU0M30.5WADyWuN3GO8kO6YKp0I88qH6Ki6t8uFnQEYP0sKEU0';
-
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-/* ---------- FETCH & RENDER PROJECTS ---------- */
-async function loadProjects() {
-  const grid = document.getElementById('projectsGrid');
-
-  const { data: projects, error } = await supabase
-    .from('projects')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Error loading projects:', error);
-    grid.innerHTML = '<p style="color: var(--text-muted)">Couldn\'t load projects right now.</p>';
-    return;
-  }
-
-  grid.innerHTML = projects.map(project => `
-    <div class="project-card">
-      <div class="project-header">
-        <span class="project-type">${project.type}</span>
-        <span class="project-year">${project.year}</span>
-      </div>
-      <h3 class="project-title">${project.title}</h3>
-      <p class="project-desc">${project.description}</p>
-      <div class="project-tags">
-        ${project.tech_tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
-      </div>
-      <div class="project-links">
-        ${project.live_link ? `<a href="${project.live_link}" class="project-link" target="_blank">live demo ↗</a>` : ''}
-        ${project.github_link ? `<a href="${project.github_link}" class="project-link" target="_blank">github ↗</a>` : ''}
-      </div>
-    </div>
-  `).join('');
-}
-
-loadProjects();
