@@ -90,70 +90,10 @@
       <p class="section-label">✦ my work</p>
       <h2 class="section-title">projects</h2>
 
-      <div class="projects-grid">
-
-        <!-- PROJECT CARD — duplicate this block for each project -->
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-type">uni project</span>
-            <span class="project-year">2024</span>
-          </div>
-          <!-- ✏️ REPLACE -->
-          <h3 class="project-title">Project Title Here</h3>
-          <p class="project-desc">A short description of what this project is, what problem it solves, and what you built. Keep it 2–3 sentences max.</p>
-          <div class="project-tags">
-            <!-- ✏️ REPLACE with your actual tech used -->
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-          </div>
-          <div class="project-links">
-            <!-- ✏️ REPLACE with actual links — remove any you don't have -->
-            <a href="#" class="project-link">live demo ↗</a>
-            <a href="#" class="project-link">github ↗</a>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD 2 -->
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-type">uni project</span>
-            <span class="project-year">2024</span>
-          </div>
-          <h3 class="project-title">Zoho CRM Configuration</h3>
-          <p class="project-desc">Full CRM setup for a fictitious pharmaceutical distributor, MedBox Labs Ltd. Covered custom fields, sales pipeline, price books, workflow automations, reports and a Web-to-Lead form.</p>
-          <div class="project-tags">
-            <span class="tech-tag">Zoho CRM</span>
-            <span class="tech-tag">CRM Config</span>
-            <span class="tech-tag">Workflow Automation</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">view demo ↗</a>
-          </div>
-        </div>
-
-        <!-- PROJECT CARD 3 — personal project -->
-        <div class="project-card">
-          <div class="project-header">
-            <span class="project-type">personal</span>
-            <!-- ✏️ REPLACE -->
-            <span class="project-year">2025</span>
-          </div>
-          <h3 class="project-title">Project Title Here</h3>
-          <p class="project-desc">Describe your personal project here. What inspired it? What did you build and learn?</p>
-          <div class="project-tags">
-            <span class="tech-tag">Tech 1</span>
-            <span class="tech-tag">Tech 2</span>
-          </div>
-          <div class="project-links">
-            <a href="#" class="project-link">live demo ↗</a>
-            <a href="#" class="project-link">github ↗</a>
-          </div>
-        </div>
-
-        <!-- ADD MORE PROJECT CARDS HERE — copy the block above -->
-
+      <div class="projects-grid" id="projectsGrid">
+        <!--LOAD DYNAMIC FROM SUPABASE(PROJET)-->
       </div>
+    
     </div>
   </section>
 
@@ -236,6 +176,8 @@
     <p class="footer-sub">made with HTML · CSS · JS · and a lot of cryo energy ❄️</p>
   </footer>
 
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
