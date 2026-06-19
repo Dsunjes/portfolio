@@ -112,6 +112,15 @@ body.light-mode .navbar {
 .nav-links a:hover { color: var(--frost-white); }
 .nav-links a:hover::after { width: 100%; }
 
+
+.nav-admin-link {
+  font-size: 1rem;
+  opacity: 0.45;
+  transition: opacity var(--transition);
+}
+.nav-admin-link:hover { opacity: 1; }
+
+
 .theme-toggle {
   background: none;
   border: 1px solid var(--border);
